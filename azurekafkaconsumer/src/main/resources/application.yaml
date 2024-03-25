@@ -1,0 +1,18 @@
+server:
+  port: 8082
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    properties:
+        security:
+            protocol: SASL_SSL
+        sasl:
+            mechanism: PLAIN
+        sasl.jaas.config: ${KAFKA_SASL_JAAS_CONFIG}
+    consumer:
+      topic-name: "EVENT_HUB_NAME_HERE"
+      group-id: "EVENT_HUB_CONSUMER_GROUP_NAME"
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
