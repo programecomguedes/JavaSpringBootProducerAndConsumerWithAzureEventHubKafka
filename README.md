@@ -50,7 +50,7 @@ Add the following lines and save the file:
 ```
 export ConnectionString='$ConnectionString'
 export KAFKA_BOOTSTRAP_SERVERS=AZURE_EVENT_HUB_NAMESPACE_NAME_HERE.servicebus.windows.net:9093
-export KAFKA_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="AZURE_EVENT_HUB_CONNECTION_STRING_HERE"
+export KAFKA_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="AZURE_EVENT_HUB_CONNECTION_STRING_HERE";
 ```
 Note: Change `AZURE_EVENT_HUB_NAMESPACE_NAME_HERE` and `AZURE_EVENT_HUB_CONNECTION_STRING_HERE` to your Azure Event Hub namespace name and Azure Event Hubs connection string respectively.
 
