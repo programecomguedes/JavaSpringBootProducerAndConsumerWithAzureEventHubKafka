@@ -1,18 +1,46 @@
 server:
   port: 8082
 
+---
+
 spring:
+  config:
+    activate:
+      on-profile: local
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      topic-name: ${KAFKA_TOPIC_NAME}
+      group-id: ${GROUP_ID}
+      auto-offset-reset: earliest
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prd
+
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
     properties:
-        security:
-            protocol: SASL_SSL
-        sasl:
-            mechanism: PLAIN
-        sasl.jaas.config: ${KAFKA_SASL_JAAS_CONFIG}
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: PLAIN
+      sasl.jaas.config: ${KAFKA_SASL_JAAS_CONFIG}
     consumer:
-      topic-name: "EVENT_HUB_NAME_HERE"
-      group-id: "EVENT_HUB_CONSUMER_GROUP_NAME"
+      topic-name: ${KAFKA_TOPIC_NAME}
+      group-id: ${GROUP_ID}
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer

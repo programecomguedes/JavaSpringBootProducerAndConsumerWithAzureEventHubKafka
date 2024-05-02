@@ -9,9 +9,10 @@ import org.springframework.test.context.TestPropertySource;
 @ContextConfiguration(classes = TestConfig.class)
 @TestPropertySource(properties = {
 		"KAFKA_BOOTSTRAP_SERVERS=namespace_name.servicebus.windows.net:9093",
-		"KAFKA_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"connection_string\";"
+		"KAFKA_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"connection_string\";",
+		"KAFKA_TOPIC_NAME=topic_name"
 })
-class AzurekafkaconsumerApplicationTests {
+class StartApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,0 +1,28 @@
+services:      
+  producer:
+    build:
+      context: ./azurekafkaproducer
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    image: producer:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=prd
+      - KAFKA_BOOTSTRAP_SERVERS={EVENT_HUB_NAMESPACE}.servicebus.windows.net:9093
+      - KAFKA_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username="\$\ConnectionString" password="{EVENT_HUB_CONNECTION_STRING}";
+      - KAFKA_TOPIC_NAME={TOPIC_NAME}
+      
+
+  consumer:
+    build:
+      context: ./azurekafkaconsumer
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    image: consumer:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=prd
+      - KAFKA_BOOTSTRAP_SERVERS={EVENT_HUB_NAMESPACE}.servicebus.windows.net:9093
+      - KAFKA_SASL_JAAS_CONFIG=org.apache.kafka.common.security.plain.PlainLoginModule required username="\$\ConnectionString" password="{EVENT_HUB_CONNECTION_STRING}";
+      - KAFKA_TOPIC_NAME={TOPIC_NAME}
+      - GROUP_ID={GROUP_ID_NAME}

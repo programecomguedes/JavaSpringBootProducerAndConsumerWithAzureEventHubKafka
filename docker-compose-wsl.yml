@@ -1,0 +1,28 @@
+services:      
+  producer:
+    build:
+      context: ./azurekafkaproducer
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    image: producer:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=prd
+      - KAFKA_BOOTSTRAP_SERVERS={KAFKA_BOOTSTRAP_SERVERS}
+      - KAFKA_SASL_JAAS_CONFIG={KAFKA_SASL_JAAS_CONFIG}
+      - KAFKA_TOPIC_NAME={TOPIC_NAME}
+      
+
+  consumer:
+    build:
+      context: ./azurekafkaconsumer
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    image: consumer:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=prd
+      - KAFKA_BOOTSTRAP_SERVERS={KAFKA_BOOTSTRAP_SERVERS}
+      - KAFKA_SASL_JAAS_CONFIG={KAFKA_SASL_JAAS_CONFIG}
+      - KAFKA_TOPIC_NAME={TOPIC_NAME}
+      - GROUP_ID={GROUP_ID_NAME}

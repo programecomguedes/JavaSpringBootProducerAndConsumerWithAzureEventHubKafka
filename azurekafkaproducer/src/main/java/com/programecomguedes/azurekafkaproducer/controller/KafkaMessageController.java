@@ -31,9 +31,7 @@ public class KafkaMessageController {
         }
 
         for (int i = 1; i <= count; i++) {
-            var message = "Message " + i + ", content: " + body;
-
-            azureKafkaProducerService.sendMessage(message);
+            azureKafkaProducerService.sendMessage(body);
         }
 
         ResponseEntity.ok().build();

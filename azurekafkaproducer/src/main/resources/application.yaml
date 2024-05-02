@@ -1,20 +1,40 @@
 server:
     port: 8081
 
-spring:
-  kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
-    properties:
-        security:
-            protocol: SASL_SSL
-        sasl:
-            mechanism: PLAIN
-        sasl.jaas.config: ${KAFKA_SASL_JAAS_CONFIG}
-    producer:
-      topic-name: "EVENT_HUB_NAME_HERE"
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
 springdoc:
   swagger-ui:
     path: /swagger-ui
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    producer:
+      topic-name: ${KAFKA_TOPIC_NAME}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prd
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    properties:
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: PLAIN
+      sasl.jaas.config: ${KAFKA_SASL_JAAS_CONFIG}
+    producer:
+      topic-name: ${KAFKA_TOPIC_NAME}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

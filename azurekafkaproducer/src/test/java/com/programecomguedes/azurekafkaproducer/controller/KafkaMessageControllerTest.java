@@ -21,13 +21,11 @@ public class KafkaMessageControllerTest {
 
     @Test
     void sendMessageTest() {
-        final String body = "test message";
+        final String body = "{\"hello\":\"world!\"}";
         final int count = 5;
 
         kafkaMessageController.sendMessage(count, body);
 
-        for (int i = 1; i <= count; i++) {
-            verify(azureKafkaProducerService, times(1)).sendMessage("Message " + i + ", content: " + body);
-        }
+        verify(azureKafkaProducerService, times(count)).sendMessage(body);
     }
 }

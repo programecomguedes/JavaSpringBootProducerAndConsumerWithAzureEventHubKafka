@@ -1,13 +1,13 @@
-package com.programecomguedes.azurekafkaproducer;
+package com.programecomguedes.azurekafkaconsumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AzurekafkaproducerApplication {
+public class StartApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AzurekafkaproducerApplication.class, args);
+		SpringApplication.run(StartApplication.class, args);
 	}
 
 }
