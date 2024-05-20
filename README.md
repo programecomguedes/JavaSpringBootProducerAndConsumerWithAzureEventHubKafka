@@ -88,8 +88,9 @@ Execute the following command:
 docker-compose -f docker-compose-wsl.yml up
 ```
 
-# Docker Hub Producer Image
+# Docker Hub Images
+Producer:
 - https://hub.docker.com/r/programecomguedes/javaspringboot-azureeventhub-kafkaproducer
 
-# Docker Hub Consumer Image
+Consumer:
 - https://hub.docker.com/r/programecomguedes/javaspringboot-azureeventhub-kafkaconsumer
